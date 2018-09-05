@@ -17,6 +17,8 @@ using Vuforia;
 /// </summary>
 public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandler
 {
+    public AudioSource audio;
+
     #region PROTECTED_MEMBER_VARIABLES
 
     protected TrackableBehaviour mTrackableBehaviour;
@@ -93,6 +95,11 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
         // Enable canvas':
         foreach (var component in canvasComponents)
             component.enabled = true;
+        
+        if (!audio.isPlaying)
+        {
+            audio.Play();
+        }
     }
 
 
@@ -113,6 +120,11 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
         // Disable canvas':
         foreach (var component in canvasComponents)
             component.enabled = false;
+        
+        if (audio.isPlaying)
+        {
+            audio.Pause();
+        }
     }
 
     #endregion // PROTECTED_METHODS
